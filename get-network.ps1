@@ -1,12 +1,23 @@
-function FunctionName {
+function get-network {
+    [CmdletBinding()]
     param (
-        $param1,
-    ) 
+        $resourceGroupName,
+    )
+    
+    begin {
+        
+    }
+    
+    process {
+        
+    }
+    
+    end {
+        return value 
+    }
 }
-
 # // create azure network with multiple subnets
 $rgName = "rg1"
-
 $vnetName = "vnet1"
 
 $subnetName = "subnet1"
