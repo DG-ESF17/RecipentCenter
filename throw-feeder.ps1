@@ -32,7 +32,7 @@ $feeds = @(
     'https://msrc.microsoft.com/blog/rss/',
     'https://www.exploit-db.com/rss.xml',
     'https://cyber.gc.ca/webservice/en/rss/alerts',
-    'http://krebsonsecurity.com/feed/',
+    'https://krebsonsecurity.com/feed/',
     'https://threatpost.com/feed/',
     'https://nakedsecurity.sophos.com/feed/',
     'https://www.darkreading.com/rss.xml',
@@ -53,9 +53,9 @@ $feeds = @(
     'https://tools.cisco.com/security/center/psirtrss20/CiscoSecurityAdvisory.xml',
     'https://isc.sans.edu/rssfeed.xml',
     'https://digital.nhs.uk/feed/cyber-alerts-feed.xml',
-    'http://malware-traffic-analysis.net/blog-entries.rss',
+    'https://malware-traffic-analysis.net/blog-entries.rss',
     'https://cxsecurity.com/wlb/rss/exploit/',
-    'http://thecyberwire.libsyn.com/rss',
+    'https://thecyberwire.libsyn.com/rss',
     'https://www.cybersecurity-insiders.com/feed/',
     'https://www.zerodayinitiative.com/rss/published/',
     'https://feeds.feedburner.com/Securityweek',
@@ -63,7 +63,7 @@ $feeds = @(
     'https://blog.malwarebytes.org/feed/',
     'https://www.kali.org/feed/',
     'https://www.youtube.com/feeds/videos.xml?channel_id=UC3s0BtrBJpwNDaflRSoiieQ',
-    'http://feeds.arstechnica.com/arstechnica/index/',
+    'https://feeds.arstechnica.com/arstechnica/index/',
     'https://news.ycombinator.com/rss',
     'https://www.wired.com/feed/rss',
     'https://hackernoon.com/feed',
@@ -82,6 +82,9 @@ foreach ($feed in $feeds) {
             'Link' = $_.link
             'Description' = $_.description
         }
+    }
+    if ($rss) {
+        write-host "Successfully retrieved $feed"
     }
 }
 
