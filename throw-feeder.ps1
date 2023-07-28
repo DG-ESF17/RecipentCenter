@@ -29,6 +29,7 @@ $feeds = @(
     'https://www.google.com/alerts/feeds/05252290034695110361/2567612534284750863',
     'https://aws.amazon.com/blogs/security/feed/',
     'https://api.msrc.microsoft.com/update-guide/rss',
+    'https://developer.apple.com/news/rss/news.rss',
     'https://msrc.microsoft.com/blog/rss/',
     'https://www.exploit-db.com/rss.xml',
     'https://cyber.gc.ca/webservice/en/rss/alerts',
@@ -37,6 +38,7 @@ $feeds = @(
     'https://nakedsecurity.sophos.com/feed/',
     'https://www.darkreading.com/rss.xml',
     'https://www.bleepingcomputer.com/feed/',
+    'https://rss.packetstormsecurity.com/',
     'https://feeds.feedburner.com/TheHackersNews',
     'https://www.reddit.com/r/netsec/.rss',
     'https://securityintelligence.com/feed/',
@@ -74,17 +76,59 @@ $feeds = @(
 )
 
 foreach ($feed in $feeds) {
-    $rss = Invoke-RestMethod -Uri $feed
-    $rss.rss.channel.item | ForEach-Object {
+    foreach ($item in Invoke-RestMethod -Uri $feed ) {
+                     $dataElements = Select-Xml -Xml $item -XPath "//data"
+                        $dataElements | ForEach-Object {
+                            [PSCustomObject]@{
+                                'Publication Date' = $_.Node.'#text'
+                                Title              = $_.Node.Title
+                                Link               = $_.Node.Link
+                            }
+                        }
         [PSCustomObject]@{
-            'Source' = $rss.rss.channel.title
-            'Title' = $_.title
-            'Link' = $_.link
-            'Description' = $_.description
+            'Publication date' = $item.pubDate
+            Title              = $item.Title
+            Link               = $item.Link
         }
-    }
-    if ($rss) {
-        write-host "Successfully retrieved $feed"
     }
 }
 
+    # $total | Sort-Object { $_."Publication Date" -as [datetime] }
+    # Select-Object -Last $numberofitems
+    # $feed = 'https://www.govinfo.gov/rss/cfr.xml' 
+    # $rss = Invoke-RestMethod -Uri $feed
+    # $items = $rss.rss.channel.item 
+    # foreach ($item in $items) {
+    #     $newItem = New-Object PSObject{
+    #         $title = $item.title
+    #         $link = $item.link
+    #         $pubDate = $item.pubDate
+    #         $description = $item.description
+    #         $enclosure = $item.enclosure
+    #         $source = $rss.rss.channel.title
+    #         $id = $item."post-id".InnerText
+    #         $category = $item.category
+    #         $author = $item.author
+    #         $comments = $item.comments
+    #         $guid = $item.guid
+
+    #     }
+
+    #     $newItem
+
+    # }
+    # foreach ($item in $rss.rss.channel.item) {
+    #     write-host "Processing " $item.title
+    #     [PSCustomObject]@{
+    #         'Source' = $rss.rss.channel.title
+    #         'Title' = $item.title
+    #         'Link' = $item.link
+    #         'Description' = $item.description
+    #     }
+    #     if ($item.enclosure) {
+    #         write-host "Successfully retrieved $item.enclosure"
+    #     } else {
+    #         write-host "whoops! $feed looks like something went wrong."
+    #     }
+    # }
+# }
