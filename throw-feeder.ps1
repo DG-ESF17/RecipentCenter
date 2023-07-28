@@ -1,19 +1,21 @@
 
 foreach ($feed in $feeds) {
     foreach ($item in Invoke-RestMethod -Uri $feed ) {
-                     $dataElements = Select-Xml -Xml $item -XPath "//data"
-                        $dataElements | ForEach-Object {
-                            [PSCustomObject]@{
-                                'Publication Date' = $_.Node.'#text'
-                                Title              = $_.Node.Title
-                                Link               = $_.Node.Link
-                            }
-                        }
-        [PSCustomObject]@{
-            'Publication date' = $item.pubDate
-            Title              = $item.Title
-            Link               = $item.Link
-        }
+            $dataElements = Select-Xml -Xml $item -XPath "//data"
+            $dataElements | ForEach-Object {
+                if ($_.Node.'#text' -eq $null ) {
+                    <# Action to perform if the condition is true #>
+                }
+                    else {
+                        <# Action to perform if the condition is false #>
+                    }
+
+            }
+            [PSCustomObject]@{
+                'Publication date' = $item.pubDate
+                Title              = $item.Title
+                Link               = $item.Link
+            }
     }
 }
 
