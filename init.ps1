@@ -8,37 +8,37 @@ $endDate = Get-Date "2022-07-31"
 #     "https://example.com/feed3.xml"
 # )
 # Define the content filter keywords
-$Filter = @(
-    "has",
-    "of"
-)
+# Filter = @(
+#     "has",
+#     "of"
+# )
 
 
-$Filter = @(
-    "*.la.gov*",
-    "*@la.gov*",
-    "*la.net*",
-    "*louisiana.gov*",
-    "*vulnerablity*",
-    "*encryption*",
-    "*cyber*",
-    "*hack*",
-    "*attack*",
-    "*exploit*",
-    "*lsu.edu*",
-    "*InfoSec*",
-    "*0 day*",
-    "*0day*",
-    "*vulnerability*",
-    "*vuln*",
-    "*vulns*",
-    "*fraud*",
-    "*bypass*",
-    "*privacy*",
-    "*LA Wallet*",
-    "*data breach*",
-    "*data leak*"
-)
+# Filter = @(
+#     "*.la.gov*",
+#     "*@la.gov*",
+#     "*la.net*",
+#     "*louisiana.gov*",
+#     "*vulnerablity*",
+#     "*encryption*",
+#     "*cyber*",
+#     "*hack*",
+#     "*attack*",
+#     "*exploit*",
+#     "*lsu.edu*",
+#     "*InfoSec*",
+#     "*0 day*",
+#     "*0day*",
+#     "*vulnerability*",
+#     "*vuln*",
+#     "*vulns*",
+#     "*fraud*",
+#     "*bypass*",
+#     "*privacy*",
+#     "*LA Wallet*",
+#     "*data breach*",
+#     "*data leak*"
+# )
 
 foreach ($feed in $feeds) {
     # Load the RSS feed into a variable
