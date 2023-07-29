@@ -13,8 +13,21 @@ foreach ($feed in $feeds) {
             }
             [PSCustomObject]@{
                 'Publication date' = $item.pubDate
-                Title              = $item.Title
-                Link               = $item.Link
+                'updated' = $item.updated
+                'id' = $item.id
+                'guid' = $item.guid
+                'name' = $item.name
+                'Title' = $item.Title
+                'Link' = $item.Link
+                'author' = $item.author
+                'category' = $item.category
+                "content" = $item.content
+                'description' = $item.description
+                'enclosure' = $item.enclosure
+                'source' = $item.source
+                'summary' = $item.summary
+                'rights' = $item.rights
+                date
             }
     }
 }
