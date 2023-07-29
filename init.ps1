@@ -31,9 +31,8 @@ $Filter = @(
     "*0day*",
     "*vulnerability*",
     "*vuln*",
-    "*vulns*",    
+    "*vulns*",
     "*fraud*",
-
     "*bypass*",
     "*privacy*",
     "*LA Wallet*",
