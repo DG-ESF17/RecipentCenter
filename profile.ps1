@@ -13,15 +13,11 @@
 -
 #>
 Test-Path $profile
+#get current ps version and user details
 $psv = $PSVersionTable.PSVersion
 $psv_mjr = $psv.Major
 $psv_mnr = $psv.Minor
 $user = $env:Username
-# Welcome message
-Write-Host "Welcome $user to the Cyber Assurance Team PowerShell Profile" -ForegroundColor Green
-Write-Host "PowerShell version is $psv_mjr.$psv_mnr" -ForegroundColor Green
-Write-Host "Profile path is $profile" -ForegroundColor Green
-Write-Host "Profile last updated on $profile.LastWriteTime" -ForegroundColor $blue
 
 #get current context
 $currentPrincipal = New-Object Security.Principal.WindowsPrincipal( [Security.Principal.WindowsIdentity]::GetCurrent() )
@@ -41,6 +37,15 @@ $currentPrincipal = New-Object Security.Principal.WindowsPrincipal( [Security.Pr
         write-host "ESF17 - Cyber Assurance Team`n" -f $black -b $white
     }
 }
+
+
+# Welcome message
+Write-Host "Welcome $user to the Cyber Assurance Team PowerShell Profile" -ForegroundColor Green
+Write-Host "PowerShell version is $psv_mjr.$psv_mnr" -ForegroundColor Green
+Write-Host "Profile path is $profile" -ForegroundColor Green
+Write-Host "Profile last updated on $profile.LastWriteTime" -ForegroundColor $blue
+
+
 function Prompt {
     if ($currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
         '#ADMIN' + $(if ($nestedpromptlevel -ge 1) { '>>' }) + '> '
