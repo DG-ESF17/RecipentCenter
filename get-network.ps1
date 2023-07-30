@@ -1,7 +1,7 @@
 function get-network {
     [CmdletBinding()]
     param (
-        $resourceGroupName,
+        $resourceGroupName
     )
     
     begin {

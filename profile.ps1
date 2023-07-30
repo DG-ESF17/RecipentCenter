@@ -196,13 +196,8 @@ Test-PackageSituation
 write-verbose   "and we are SET!"
 Set-Terminal
 
-$webUrl = "https://esf17lagov.sharepoint.com/sites/records"
-$docLibName = "Records"
-Connect-PnPOnline -Url $webUrl
-
-# Get the SharePoint folder object and the server-relative path of the folder
-$folder = Get-PnPFolder -Name $docLibName
-$serverRelativeUrl = $folder.ServerRelativeUrl
-
-# Map the SharePoint folder to a PowerShell drive
-New-PSDrive -Name "SP" -PSProvider FileSystem -Root "\\yourtenantname.sharepoint.com@SSL\DavWWWRoot$serverRelativeUrl" -Credential (Get-Credential)
+# $webUrl = "https://esf17lagov.sharepoint.com/sites/records"
+# $docLibName = "Records"
+# Connect-PnPOnline -Url $webUrl
+# # AzureADPreview\Connect-AzureAD
+# # Get the SharePoint folder object and the server-relative path of the folder
