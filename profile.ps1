@@ -41,8 +41,7 @@ write-verbose   "Setting proxy auth..."
 (New-Object -TypeName System.Net.WebClient).Proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials
 #1.0 proxy auth
 #Let's Go!🚀
-write-verbose   "Checking Internets..."
-#1.01 confirm internet connectivity
+
 function Test-InternetConnection {
     try {
         $pingResult = Test-Connection -ComputerName "www.google.com" -Count 1 -ErrorAction SilentlyContinue
@@ -77,29 +76,25 @@ $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Pri
         write-host "$teamname `n" -f black -b white
     }
 }
+#set execution policy
+write-verbose   "Setting execution policy..."
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 
 #verbose
 write-verbose   "Setting up profile for trusted team members..."
 write-verbose   "Checking PowerShell version..."
 write-verbose   "PowerShell version is $psv_mjr.$psv_mnr"
-# Welcome message
+
+########## WELCOME MESSAGE ##########
 $message += "Welcome $user to the Cyber Assurance Team PowerShell Profile1`n"
 $message += "PowerShell version is $psv_mjr.$psv_mnr`n"
 $message += "Profile path is $profile`n"
 $message += "Profile last updated on $profile.LastWriteTime`n"
 
-#set execution policy
-write-verbose   "Setting execution policy..."
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-
-#set proxy
-write-verbose   "Setting proxy..."
-
 #set directory
 write-verbose   "Setting directory..."
     #TODO: Set-Location C:\Users\dmg\Documents\GitHub\DG-P$
     #set env vars
-write-verbose   "Setting environment variables..."
 
 #set aliases
 write-verbose   "Setting aliases..."
@@ -193,7 +188,21 @@ function Test-PackageSituation {
 if ($booboo -gt 0) {
     Write-Host  "There were $booboo errors.  Please review the above messages and fix the errors." -ForegroundColor Red
 }
-
+#buyyow!
+write-verbose   "Checking Internets..."
 Test-InternetConnection
+write-verbose   "Checking your package.......  so to speak"
 Test-PackageSituation
+write-verbose   "and we are SET!"
 Set-Terminal
+
+$webUrl = "https://esf17lagov.sharepoint.com/sites/records"
+$docLibName = "Records"
+Connect-PnPOnline -Url $webUrl
+
+# Get the SharePoint folder object and the server-relative path of the folder
+$folder = Get-PnPFolder -Name $docLibName
+$serverRelativeUrl = $folder.ServerRelativeUrl
+
+# Map the SharePoint folder to a PowerShell drive
+New-PSDrive -Name "SP" -PSProvider FileSystem -Root "\\yourtenantname.sharepoint.com@SSL\DavWWWRoot$serverRelativeUrl" -Credential (Get-Credential)
