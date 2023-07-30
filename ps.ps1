@@ -77,3 +77,15 @@ $serverRelativeUrl = $folder.ServerRelativeUrl
 
 # Map the SharePoint folder to a PowerShell drive
 New-PSDrive -Name "SP" -PSProvider FileSystem -Root "\\yourtenantname.sharepoint.com@SSL\DavWWWRoot$serverRelativeUrl" -Credential (Get-Credential)
+
+
+
+$message = ""
+
+# Perform some actions and append messages to the $message variable
+$message += "Action 1 completed successfully.`n"
+$message += "Action 2 completed successfully.`n"
+$message += "Action 3 completed successfully.`n"
+
+# Output the message to the user terminal screen
+Write-Output $message

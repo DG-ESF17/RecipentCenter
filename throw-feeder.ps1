@@ -31,6 +31,25 @@ foreach ($feed in $feeds) {
             }
     }
 }
+https://www.darkreading.com/rss.xml
+
+
+$url = 'http://www.independent.co.uk/news/uk/rss'
+Invoke-RestMethod -Uri $url -OutFile c:\scripts\worldnews.xml
+[xml]$Content = Get-Content C:\scripts\worldnews.xml
+$Feed = $Content.rss.channel
+
+# User Input field
+$UserTerm = Read-Host 'Enter a Term'
+ForEach ($msg in $Feed.Item | ?{$_.Title.Contains($userTerm)}) {
+    [PSCustomObject]@{
+        'Source' = "News"
+        'Title' = $msg.title
+        'Link' = $msg.link
+        'Description' = $msg.description
+    }
+
+}
 
     # $total | Sort-Object { $_."Publication Date" -as [datetime] }
     # Select-Object -Last $numberofitems
